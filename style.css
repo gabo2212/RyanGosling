@@ -1,0 +1,241 @@
+/* Page Styling */
+body {
+    background: url('/images/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+/* Container Styling */
+.container {
+    background: rgba(20, 20, 20, 0.85);
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+}
+
+/* Styling */
+.movie, .film-category {
+    background: rgba(50, 50, 50, 0.9);
+    color: white;
+    padding: 25px;
+    border-radius: 12px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%; 
+    margin: 10px; 
+}
+.film-category {
+    background: rgba(50, 50, 50, 0.9);
+    color: white;
+    padding: 25px;
+    border-radius: 12px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    margin: 10px; 
+}
+/* Borders in Recherche */
+.movie-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; 
+    gap: 20px; 
+}
+
+/* Hover Effect */
+.movie:hover, .film-category:hover {
+    transform: scale(1.03);
+    box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.3);
+}
+
+/* Images */
+.movie img, .clan-img, .film-category img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+}
+
+/* Search Form */
+.search-form {
+    background: rgba(10, 10, 10, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+}
+
+/* Dropdowns */
+.search-form input,
+.search-form select {
+    background: rgba(50, 50, 50, 0.9);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 10px;
+}
+
+/* Placeholder Text */
+.search-form input::placeholder,
+.search-form select {
+    color: rgba(255, 255, 255, 0.9);
+    opacity: 1;
+}
+
+/* Effects */
+.search-form input:focus,
+.search-form select:focus {
+    background: rgba(30, 30, 30, 1);
+    color: white;
+    outline: none;
+    border: 1px solid rgba(255, 0, 100, 0.8);
+}
+
+/* Dropdown Options */
+.search-form select option {
+    background: rgba(30, 30, 30, 0.9);
+    color: white;
+}
+
+/* Buttons */
+.btn {
+    width: 150px;
+    background: rgba(200, 0, 75, 0.8);
+    border: none;
+    color: white;
+    padding: 10px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: rgba(255, 0, 100, 1);
+}
+
+/* Grid */
+@media (max-width: 768px) {
+    .movie, .film-category {
+        width: 100%;
+    }
+}
+
+@media (min-width: 769px) {
+    .movie, .film-category {
+        flex: 1 1 30%;
+        max-width: 30%;
+    }
+}
+/* 📌 Modern Sidebar Navigation */
+.modern-sidebar {
+    position: fixed;
+    top: 80px; /* Adjusted to align with header */
+    left: 0;
+    width: 60px; /* Small default width */
+    height: 40vh; /* Reduced height for better fit */
+    background: rgba(20, 20, 20, 0.9);
+    transition: width 0.3s ease-in-out;
+    overflow: hidden;
+    border-radius: 0 15px 15px 0;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Start from top */
+}
+
+.modern-sidebar:hover, .modern-sidebar.active {
+    width: 200px;
+}
+
+/* 🏠 Logo Icon */
+.modern-sidebar .logo {
+    font-size: 26px;
+    color: white;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* 📌 Navigation List */
+.modern-sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.modern-sidebar ul li {
+    width: 100%;
+}
+
+/* 🎯 Navigation Links */
+.modern-sidebar ul li a {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centers icons & text */
+    text-decoration: none;
+    color: white;
+    padding: 15px;
+    font-size: 18px;
+    transition: 0.3s;
+    width: 100%;
+    position: relative;
+    flex-direction: column; /* Ensures vertical alignment */
+}
+
+/* 🎭 Emoji Styling */
+.modern-sidebar ul li a .emoji {
+    font-size: 24px;
+    text-align: center;
+    opacity: 1;
+    display: block;
+    margin-bottom: 5px; /* Adjusts spacing from text */
+}
+
+/* 📝 Text Styling */
+.modern-sidebar ul li a .text {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    white-space: nowrap;
+    text-align: center;
+}
+
+/* ✨ Expand Effect */
+.modern-sidebar:hover ul li a, .modern-sidebar.active ul li a {
+    justify-content: center;
+    align-items: center;
+}
+
+.modern-sidebar:hover ul li a .emoji, .modern-sidebar.active ul li a .emoji {
+    opacity: 1; /* Ensures emojis remain visible */
+}
+
+.modern-sidebar:hover ul li a .text, .modern-sidebar.active ul li a .text {
+    opacity: 1;
+}
+
+/* 📱 Mobile Click Handling */
+@media (max-width: 768px) {
+    .modern-sidebar {
+        width: 60px;
+        height: 50vh;
+        top: 80px; /* Aligns with header in mobile view as well */
+    }
+    .modern-sidebar ul li a {
+        justify-content: center;
+    }
+    .modern-sidebar ul li a .emoji {
+        pointer-events: auto;
+    }
+    .modern-sidebar.active {
+        width: 200px;
+    }
+}

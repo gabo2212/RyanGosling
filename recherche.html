@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recherche de Films - Ryan Gosling</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="text-center p-4 bg-dark text-white">
+        <h1>Recherche de Films</h1>
+        <p>Utilisez les filtres pour explorer les films de Ryan Gosling</p>
+    </header>
+    <nav class="modern-sidebar">
+        <div class="logo">🎬</div>
+        <ul>
+            <li>
+                <a href="index.html">
+                    <span class="emoji">🏠</span>
+                    <span class="text">Accueil</span>
+                </a>
+            </li>
+            <li>
+                <a href="recherche.html">
+                    <span class="emoji">🔍</span>
+                    <span class="text">Recherche</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <div class="container mt-4">
+        <!-- Search Form -->
+        <form action="https://www.w3schools.com/action_page.php" method="POST" class="search-form" onsubmit="return filterMovies();">
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <label for="name">Nom du film</label>
+                    <input type="text" id="name" name="name" class="form-control" placeholder="Ex: Drive">
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <label for="year">Année de sortie</label>
+                    <input type="number" id="year" name="year" class="form-control" placeholder="Ex: 2011">
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <label for="genre">Genre</label>
+                    <select id="genre" name="genre" class="form-control">
+                        <option value="">Tous les genres</option>
+                        <option value="action">Action</option>
+                        <option value="drama">Drame</option>
+                        <option value="scifi">Science-Fiction</option>
+                    </select>
+                </div>
+
+                <!-- Yes/No Dropdown for Lead Role -->
+                <div class="col-md-3 col-sm-6">
+                    <label for="leadRole">Rôle principal ?</label>
+                    <select id="leadRole" name="leadRole" class="form-control">
+                        <option value="">Peu importe</option>
+                        <option value="yes">Oui</option>
+                        <option value="no">Non</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="text-center mt-3">
+                <button type="reset" class="btn btn-secondary">Réinitialiser</button>
+                <button type="submit" class="btn btn-primary">Rechercher</button>
+            </div>
+        </form>
+
+        <!-- Movie List -->
+        <div id="movieContainer" class="row movie-list mt-4"></div>
+
+        <!-- no results are found -->
+        <p id="noResults" class="text-center mt-4 text-danger" style="display: none;">Aucun film trouvé.</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+       const movies = [
+    { title: "The Gray Man", year: 2022, genre: "action", image: "images/greyman.jpg", lead: true },
+    { title: "Drive", year: 2011, genre: "action", image: "images/drive.jpg", lead: true },
+    { title: "Only God Forgives", year: 2013, genre: "action", image: "images/onlygodforgives.jpg", lead: true },
+    { title: "Gangster Squad", year: 2013, genre: "action", image: "images/gangstersquad.jpg", lead: true },
+    { title: "La La Land", year: 2016, genre: "drama", image: "images/La-La-Land.jpg", lead: true },
+    { title: "The Notebook", year: 2004, genre: "drama", image: "images/notebook.jpg", lead: true },
+    { title: "Blue Valentine", year: 2010, genre: "drama", image: "images/bluevalentine.jpg", lead: true },
+    { title: "Crazy, Stupid, Love", year: 2011, genre: "drama", image: "images/crazystupidlove.jpg", lead: false },
+    { title: "Blade Runner 2049", year: 2017, genre: "scifi", image: "images/bladerunner.jpg", lead: true },
+    { title: "First Man", year: 2018, genre: "scifi", image: "images/firstman.jpg", lead: true },
+    { title: "Fracture", year: 2007, genre: "drama", image: "images/fracture.jpg", lead: false },
+    { title: "The Nice Guys", year: 2016, genre: "drama", image: "images/niceguys.jpg", lead: false }
+];
+
+// Display Movies
+function displayMovies(filteredMovies) {
+    const container = document.getElementById("movieContainer");
+    container.innerHTML = "";
+
+    if (filteredMovies.length === 0) {
+        container.innerHTML = "<p class='text-center text-danger'>Aucun film trouvé.</p>";
+    } else {
+        filteredMovies.forEach(movie => {
+            const movieHTML = `
+                <div class="col-md-4 col-sm-12 movie">
+                    <a href="detail.html">
+                        <img src="${movie.image}" alt="${movie.title}">
+                    </a>
+                    <h3>${movie.title} (${movie.year})</h3>
+                    <p><strong>Genre:</strong> ${movie.genre.charAt(0).toUpperCase() + movie.genre.slice(1)}</p>
+                    <a href="detail.html" class="btn btn-info">Voir détails</a>
+                </div>
+            `;
+            container.innerHTML += movieHTML;
+        });
+    }
+}
+
+        // Filter Movies
+        function filterMovies() {
+            const searchTitle = document.getElementById("name").value.toLowerCase();
+            const searchYear = document.getElementById("year").value;
+            const searchGenre = document.getElementById("genre").value;
+            const leadRoleFilter = document.getElementById("leadRole").value;
+
+            const filteredMovies = movies.filter(movie => {
+                let matchesTitle = searchTitle ? movie.title.toLowerCase().includes(searchTitle) : true;
+                let matchesYear = searchYear ? movie.year == searchYear : true;
+                let matchesGenre = searchGenre ? movie.genre === searchGenre : true;
+                let matchesLeadRole = 
+                    leadRoleFilter === "yes" ? movie.lead === true :
+                    leadRoleFilter === "no" ? movie.lead === false : true;
+
+                return matchesTitle && matchesYear && matchesGenre && matchesLeadRole;
+            });
+
+            displayMovies(filteredMovies);
+            return false; // Prevents form from actually submitting
+        }
+
+        // Display all movies
+        window.onload = () => displayMovies(movies);
+    </script>
+
+</body>
+</html>
